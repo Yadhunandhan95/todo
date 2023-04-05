@@ -1,0 +1,30 @@
+<mat-toolbar>To do list:</mat-toolbar>
+<mat-card class="todocard">
+
+
+	<mat-list role="list">
+
+		<mat-toolbar *ngFor="let item of todoCollection ;" class="todoitem" color="primary">
+			<mat-toolbar-row>
+
+				<span [ngClass]="{'done-true': item.isDone, 'done-false': !item.isDone}">{{item.content}}</span>
+				<span class="todo-spacer"></span>
+				<mat-icon (click)="markItemAsDone(item)" class="btn" *ngIf="!item.isDone"> check</mat-icon>
+				<mat-icon (click)="markItemAsNotDone(item)" class="btn" *ngIf="item.isDone"> undo</mat-icon>
+
+				<mat-icon (click)="editItem(item)" class="btn"> edit</mat-icon>
+				<mat-icon (click)="deleteItem(item)" class="btn">delete</mat-icon>
+			</mat-toolbar-row>
+		</mat-toolbar>
+
+	</mat-list>
+	<form class="todo-form">
+		<mat-form-field class="full-width">
+			<input matInput placeholder="Enter To do" class="textareafull" [(ngModel)]="todo_input.content" name="inputValue">
+		</mat-form-field>
+		<span class="todo-spacer"></span>
+		<button mat-button (click)="addNewItem()" *ngIf="!editValue">Add</button>
+		<button mat-button (click)="saveNewItem()" *ngIf="editValue">Save</button>
+	</form>
+
+</mat-card>
